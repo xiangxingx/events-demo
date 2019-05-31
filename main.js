@@ -11,16 +11,23 @@ document.addEventListener('click', function () {
   console.log(2)
 }) */
 
+let target = true
 $(btn).on('click', function () {
-  $(popover).show() // jQuery 高版本不能用show？
-  console.log(1)
+  if (target) {
+    $(popover).show() // jQuery 高版本不能用show？
+  } else {
+    $(popover).hide()
+  }
   $(document).one('click', function () { // 只监听一次，且在btn被点击时
     $(popover).hide() // hide()
-    console.log(3)
+    target = !target
+    console.log('document',target)
   })
+  target = !target
+  console.log('btn',target)
 })
+
 $(wrapper).on('click', function (ev) {
   ev.stopPropagation()
-  console.log(2)
 })
 
